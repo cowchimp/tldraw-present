@@ -85,7 +85,7 @@ export default function App() {
         assetUrls={assetUrls}
         onMount={(editor) => {
           editorRef.current = editor;
-          editor.getInitialMetaForShape = (_shape) => {
+          editor.getInitialMetaForShape = () => {
             return {
               groupId: 0,
             };
