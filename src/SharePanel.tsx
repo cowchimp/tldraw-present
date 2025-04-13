@@ -1,8 +1,14 @@
-import { TldrawUiIcon } from "tldraw";
+import { TldrawUiButton, TldrawUiIcon } from "tldraw";
+import { useWelcomeDialog } from "./WelcomeDialog/useWelcomeDialog";
 
 export function SharePanel() {
+  const { showDialog } = useWelcomeDialog();
+
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+      <TldrawUiButton type="icon" onClick={showDialog}>
+        <TldrawUiIcon icon="help" />
+      </TldrawUiButton>
       <Link href="https://yonatan.dev" icon="blog" label="Visit my blog" />
       <Link href="https://twitter.com/cowchimp" icon="twitter" label="Reach out on Twitter" />
       <Link href="https://github.com/cowchimp/tldraw-present" icon="github" label="View source code on GitHub" />

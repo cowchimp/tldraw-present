@@ -7,6 +7,7 @@ import { getUniqueGroupIdsInOrder } from "./getUniqueGroupIdsInOrder";
 import { getNewActions } from "./getNewActions";
 import { assetUrls } from "./assetUrls";
 import { SharePanel } from "./SharePanel";
+import { DialogHandler } from "./WelcomeDialog/DialogHandler";
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
@@ -60,6 +61,7 @@ export default function App() {
         }}
         components={{
           ...(isPresentationEditModeActive ? { InFrontOfTheCanvas } : {}),
+          ...(isPresentationModeActive ? { StylePanel: null } : {}),
           QuickActions: () => {
             const editor = useEditor();
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(editor);
@@ -73,6 +75,7 @@ export default function App() {
             );
           },
           SharePanel,
+          TopPanel: DialogHandler,
         }}
         isShapeHidden={(shape, editor) => {
           if (!isPresentationModeActive) {

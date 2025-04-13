@@ -12,6 +12,9 @@
     "deploy": "npm run build && netlify deploy --prod"
   },
   "dependencies": {
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tldraw": "^3.11.1"

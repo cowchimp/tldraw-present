@@ -1,0 +1,57 @@
+/* Embla Carousel Styles */
+.embla {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.embla__container {
+  display: flex;
+  backface-visibility: hidden;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.embla__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.embla__dots {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.embla__dot:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.embla__dot--selected {
+  background-color: rgba(0, 0, 0, 0.8);
+}
