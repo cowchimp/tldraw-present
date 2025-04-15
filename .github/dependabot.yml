@@ -9,3 +9,14 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    allow:
+      - dependency-name: "tldraw"
+      - dependency-name: "@tldraw/tldraw"
+    groups:
+      tldraw-packages:
+        patterns:
+          - "tldraw"
+          - "@tldraw/tldraw"
+        update-types:
+          - "minor"
+          - "patch"
