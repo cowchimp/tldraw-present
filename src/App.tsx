@@ -77,13 +77,13 @@ export default function App() {
           SharePanel,
           TopPanel: DialogHandler,
         }}
-        isShapeHidden={(shape, editor) => {
+        getShapeVisibility={(shape, editor) => {
           if (!isPresentationModeActive) {
-            return false;
+            return "visible";
           }
           const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(editor);
           const groupId = uniqueGroupIdsInOrder[currentStep];
-          return Number(shape.meta.groupId) > groupId;
+          return Number(shape.meta.groupId) > groupId ? "hidden" : "visible";
         }}
         assetUrls={assetUrls}
         onMount={(editor) => {
