@@ -8,6 +8,7 @@ import { getNewActions } from "./getNewActions";
 import { assetUrls } from "./assetUrls";
 import { SharePanel } from "./SharePanel";
 import { DialogHandler } from "./WelcomeDialog/DialogHandler";
+import { IconTool } from "./IconTool";
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
@@ -31,15 +32,19 @@ export default function App() {
     setIsPresentationModeActive(false);
   };
 
+  const customTools = [IconTool];
+
   return (
     <div style={{ position: "fixed", inset: 0 }}>
       <Tldraw
-        persistenceKey="tldraw-present"
+        persistenceKey="icon"
         onUiEvent={(event) => {
           if (event === "change-page") {
             setCurrentStep(0);
           }
         }}
+        tools={customTools}
+        initialState="icon"
         overrides={{
           actions: (_editor, actions) => {
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(_editor);

@@ -12,6 +12,7 @@
     "deploy": "npm run build && netlify deploy --prod"
   },
   "dependencies": {
+    "@icon-park/svg": "^1.4.2",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
