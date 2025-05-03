@@ -27,12 +27,12 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
           placeholder="Search icons by name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ width: "100%", marginBottom: 12, padding: 8, fontSize: 16 }}
+          className="icon-dialog__search-input"
         />
-        <div style={{ marginBottom: 12, display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <div className="icon-dialog__categories">
           {Array.from(categories).map((x) => (
             <button
-              className={`category${selectedCategory === x ? " active" : ""}`}
+              className={`icon-dialog__category${selectedCategory === x ? " icon-dialog__category--active" : ""}`}
               key={x}
               onClick={() => setSelectedCategory(selectedCategory === x ? null : x)}
             >
@@ -41,34 +41,18 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
           ))}
         </div>
         {filteredIcons.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#888", margin: "32px 0" }}>No matches</div>
+          <div className="icon-dialog__no-matches">No matches</div>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(48px, 1fr))",
-              gap: 12,
-              maxHeight: 400,
-              overflowY: "auto",
-              background: "#fafbfc",
-              padding: 8,
-              borderRadius: 8,
-              border: "1px solid #eee",
-            }}
-          >
+          <div className="icon-dialog__icon-grid">
             {filteredIcons.map((x) => (
               <div
                 key={x.name}
-                style={{ cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center" }}
+                className="icon-dialog__icon-item"
                 onClick={() => console.log("Selected icon:", x.name)}
                 title={x.name}
               >
                 <IconPreview name={x.name} />
-                <span
-                  style={{ fontSize: 10, marginTop: 2, color: "#555", textAlign: "center", wordBreak: "break-all" }}
-                >
-                  {x.name}
-                </span>
+                <span className="icon-dialog__icon-label">{x.name}</span>
               </div>
             ))}
           </div>

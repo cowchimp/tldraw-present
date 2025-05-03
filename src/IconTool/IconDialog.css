@@ -1,4 +1,4 @@
-.category {
+.icon-dialog__category {
   font-family: "Arial", sans-serif;
   font-size: 12px;
   padding: 4px 12px;
@@ -6,7 +6,54 @@
   border-radius: 64px;
 }
 
-.category.active {
+.icon-dialog__category--active {
   background-color: black;
   color: white;
+}
+
+.icon-dialog__search-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.icon-dialog__categories {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.icon-dialog__no-matches {
+  text-align: center;
+  color: #888;
+  margin: 32px 0;
+}
+
+.icon-dialog__icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: #fafbfc;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.icon-dialog__icon-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-dialog__icon-label {
+  font-size: 10px;
+  margin-top: 2px;
+  color: #555;
+  text-align: center;
+  word-break: break-all;
 }
