@@ -1,13 +1,14 @@
-import { useDialogs, useEditor } from "tldraw";
+import { TldrawUiButton, useDialogs, useEditor } from "tldraw";
 import { IconDialog } from "./IconDialog";
 import { IconPreview } from "./IconPreview";
-import { getIcon } from "./selectedIcon";
+import { getIcon, setIcon } from "./selectedIcon";
 import { useEffect, useState } from "react";
 
 export function IconDialogHandler() {
   const editor = useEditor();
   const dialogs = useDialogs();
   const [isIconToolActive, setIsIconToolActive] = useState(false);
+  const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
 
   useEffect(() => {
     editor.on("icon-tool-enter" as any, () => {
@@ -24,8 +25,8 @@ export function IconDialogHandler() {
 
   return (
     isIconToolActive && (
-      <button
-        className="hihihi"
+      <TldrawUiButton
+        type="tool"
         style={{
           userSelect: "auto",
           WebkitUserSelect: "auto",
@@ -33,12 +34,20 @@ export function IconDialogHandler() {
         }}
         onClick={() =>
           dialogs.addDialog({
-            component: ({ onClose }) => <IconDialog onClose={onClose} />,
+            component: ({ onClose }) => (
+              <IconDialog
+                onClose={onClose}
+                onSelectIcon={(icon: string) => {
+                  setIcon(icon);
+                  setSelectedIcon(icon);
+                }}
+              />
+            ),
           })
         }
       >
-        <IconPreview name={getIcon()} />
-      </button>
+        <IconPreview name={selectedIcon} />
+      </TldrawUiButton>
     )
   );
 }

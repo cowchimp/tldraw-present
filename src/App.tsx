@@ -46,12 +46,6 @@ const Toolbar: TLComponents["Toolbar"] = (props) => {
   );
 };
 
-const customAssetUrls = {
-  icons: {
-    "icon-tool": "/icon-park.svg",
-  },
-};
-
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -138,7 +132,7 @@ export default function App() {
           const groupId = uniqueGroupIdsInOrder[currentStep];
           return Number(shape.meta.groupId) > groupId ? "hidden" : "visible";
         }}
-        assetUrls={{ ...assetUrls, ...customAssetUrls }}
+        assetUrls={assetUrls}
         onMount={(editor) => {
           editorRef.current = editor;
           editor.getInitialMetaForShape = () => {

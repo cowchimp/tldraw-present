@@ -3,14 +3,20 @@ import { TldrawUiButton, TldrawUiButtonLabel, TldrawUiDialogBody, TldrawUiDialog
 import iconsJson from "@icon-park/svg/icons.json";
 import "./IconDialog.css";
 import { IconPreview } from "./IconPreview";
-import { getIcon, setIcon } from "./selectedIcon";
+import { getIcon } from "./selectedIcon";
 
 const categories = iconsJson.reduce((acc, icon) => {
   acc.add(icon.category);
   return acc;
 }, new Set<string>());
 
-export function IconDialog({ onClose }: { onClose: () => void }) {
+export function IconDialog({
+  onClose,
+  onSelectIcon,
+}: {
+  onClose: () => void;
+  onSelectIcon: (iconName: string) => void;
+}) {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
@@ -21,9 +27,9 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
     return matchesCategory && matchesSearch;
   });
 
-  const onSetIcon = (iconName: string) => {
-    setSelectedIcon(iconName);
-    setIcon(iconName);
+  const onSetIcon = (icon: string) => {
+    setSelectedIcon(icon);
+    onSelectIcon(icon);
   };
 
   return (
