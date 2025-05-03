@@ -48,7 +48,7 @@ const Toolbar: TLComponents["Toolbar"] = (props) => {
 
 const customAssetUrls = {
   icons: {
-    "icon-tool": "/icon-tool.svg",
+    "icon-tool": "/icon-park.svg",
   },
 };
 
