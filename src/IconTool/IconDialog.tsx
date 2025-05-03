@@ -79,6 +79,14 @@ export function IconDialog({
         )}
       </TldrawUiDialogBody>
       <TldrawUiDialogFooter className="tlui-dialog__footer__actions">
+        <div style={{ marginRight: "auto", paddingLeft: "16px" }}>
+          <TldrawUiButtonLabel>
+            Icons by{" "}
+            <a href="http://iconpark.bytedance.com/" target="_blank" rel="noopener noreferrer">
+              IconPark
+            </a>
+          </TldrawUiButtonLabel>
+        </div>
         <TldrawUiButton type="primary" onClick={onClose}>
           <TldrawUiButtonLabel>Close</TldrawUiButtonLabel>
         </TldrawUiButton>

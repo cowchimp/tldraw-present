@@ -5,5 +5,5 @@ export function setIcon(iconName: string) {
 }
 
 export function getIcon(): string {
-  return localStorage.getItem(LOCAL_STORAGE_KEY) || "abdominal";
+  return localStorage.getItem(LOCAL_STORAGE_KEY) || "audit";
 }
