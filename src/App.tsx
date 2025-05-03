@@ -1,4 +1,13 @@
-import { Editor, Tldraw, useEditor } from "tldraw";
+import {
+  DefaultToolbar,
+  DefaultToolbarContent,
+  Editor,
+  Tldraw,
+  TldrawUiMenuItem,
+  useEditor,
+  useIsToolSelected,
+  useTools,
+} from "tldraw";
 import { useRef, useState } from "react";
 import "tldraw/tldraw.css";
 import { InFrontOfTheCanvas } from "./InFrontOfTheCanvas";
@@ -10,41 +19,7 @@ import { SharePanel } from "./SharePanel";
 import { WelcomeDialogHandler } from "./WelcomeDialog/WelcomeDialogHandler";
 import { IconTool } from "./IconTool/IconTool";
 import { IconDialogHandler } from "./IconTool/IconDialogHandler";
-import {
-  DefaultToolbar,
-  DefaultToolbarContent,
-  TldrawUiMenuItem,
-  useIsToolSelected,
-  useTools,
-  TLUiOverrides,
-  TLComponents,
-} from "tldraw";
-
-const uiOverrides: TLUiOverrides = {
-  tools(editor, tools) {
-    tools.icon = {
-      id: "icon",
-      icon: "icon-tool",
-      label: "Icon",
-      kbd: "i",
-      onSelect: () => {
-        editor.setCurrentTool("icon");
-      },
-    };
-    return tools;
-  },
-};
-
-const Toolbar: TLComponents["Toolbar"] = (props) => {
-  const tools = useTools();
-  const isIconSelected = useIsToolSelected(tools["icon"]);
-  return (
-    <DefaultToolbar {...props}>
-      <TldrawUiMenuItem {...tools["icon"]} isSelected={isIconSelected} />
-      <DefaultToolbarContent />
-    </DefaultToolbar>
-  );
-};
+import { extendWithIconTool } from "./IconTool/ui-overrides.tsx";
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
@@ -68,8 +43,6 @@ export default function App() {
     setIsPresentationModeActive(false);
   };
 
-  const customTools = [IconTool];
-
   return (
     <div style={{ position: "fixed", inset: 0 }}>
       <Tldraw
@@ -79,9 +52,11 @@ export default function App() {
             setCurrentStep(0);
           }
         }}
-        tools={customTools}
+        tools={[IconTool]}
         overrides={{
-          ...uiOverrides,
+          tools(editor, tools) {
+            return extendWithIconTool(editor, tools);
+          },
           actions: (_editor, actions) => {
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(_editor);
             const maxStep = uniqueGroupIdsInOrder.length - 1;
@@ -103,7 +78,16 @@ export default function App() {
         components={{
           ...(isPresentationEditModeActive ? { InFrontOfTheCanvas } : {}),
           ...(isPresentationModeActive ? { StylePanel: null } : {}),
-          Toolbar,
+          Toolbar: (props) => {
+            const tools = useTools();
+            const isIconSelected = useIsToolSelected(tools["icon"]);
+            return (
+              <DefaultToolbar {...props}>
+                <TldrawUiMenuItem {...tools["icon"]} isSelected={isIconSelected} />
+                <DefaultToolbarContent />
+              </DefaultToolbar>
+            );
+          },
           QuickActions: () => {
             const editor = useEditor();
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(editor);

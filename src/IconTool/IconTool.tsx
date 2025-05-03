@@ -1,4 +1,4 @@
-import { AssetRecordType, createShapeId, StateNode, TLImageShape, TLPointerEventInfo } from "tldraw";
+import { AssetRecordType, createShapeId, StateNode, TLImageShape } from "tldraw";
 import { getIcon } from "./selectedIcon";
 import { getIconByName } from "./getIconByName";
 import { DEFAULT_ICON_FILL_COLOR } from "./constants";
