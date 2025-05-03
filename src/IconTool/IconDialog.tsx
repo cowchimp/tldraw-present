@@ -21,6 +21,11 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
     return matchesCategory && matchesSearch;
   });
 
+  const onSetIcon = (iconName: string) => {
+    setSelectedIcon(iconName);
+    setIcon(iconName);
+  };
+
   return (
     <>
       <TldrawUiDialogBody>
@@ -53,8 +58,11 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
                   selectedIcon === x.name ? " icon-dialog__icon-item--selected" : ""
                 }`}
                 onClick={() => {
-                  setSelectedIcon(x.name);
-                  setIcon(x.name);
+                  onSetIcon(x.name);
+                }}
+                onDoubleClick={() => {
+                  onSetIcon(x.name);
+                  onClose();
                 }}
                 title={x.name}
               >
