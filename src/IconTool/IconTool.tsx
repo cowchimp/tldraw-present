@@ -1,13 +1,16 @@
-import { AssetRecordType, createShapeId, StateNode, TLImageShape } from "tldraw";
+import { AssetRecordType, createShapeId, StateNode, TLImageShape, TLPointerEventInfo } from "tldraw";
 import { getIcon } from "./selectedIcon";
 import { getIconByName } from "./getIconByName";
 
 export class IconTool extends StateNode {
   static override id = "icon" as const;
 
-  override onEnter() {
-    console.log("open-icon-dialog");
-    this.editor.emit("open-icon-dialog" as any, {});
+  override onEnter(): void {
+    this.editor.emit("icon-tool-enter" as any, {});
+  }
+
+  override onExit(): void {
+    this.editor.emit("icon-tool-exit" as any, {});
   }
 
   override onPointerDown() {
