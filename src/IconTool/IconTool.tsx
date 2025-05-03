@@ -1,6 +1,7 @@
 import { AssetRecordType, createShapeId, StateNode, TLImageShape, TLPointerEventInfo } from "tldraw";
 import { getIcon } from "./selectedIcon";
 import { getIconByName } from "./getIconByName";
+import { DEFAULT_ICON_FILL_COLOR } from "./constants";
 
 export class IconTool extends StateNode {
   static override id = "icon" as const;
@@ -18,7 +19,8 @@ export class IconTool extends StateNode {
 
     const selectedIconName = getIcon();
     const icon = getIconByName(selectedIconName);
-    const svgString = icon({ theme: "outline" });
+    const svgString = icon({ theme: "filled", fill: DEFAULT_ICON_FILL_COLOR });
+    console.log(svgString);
     const size = 48;
 
     const svgDataUrl = svgStringToBase64(svgString);
