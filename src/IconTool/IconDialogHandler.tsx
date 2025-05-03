@@ -12,7 +12,6 @@ export function IconDialogHandler() {
         component: ({ onClose }) => <IconDialog onClose={onClose} />,
       });
     }
-    console.log("registering");
     editor.on("open-icon-dialog" as any, handleOpenIconDialog);
     return () => {
       editor.off("open-icon-dialog" as any, handleOpenIconDialog);

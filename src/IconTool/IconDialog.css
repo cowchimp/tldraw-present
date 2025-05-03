@@ -57,3 +57,9 @@
   text-align: center;
   word-break: break-all;
 }
+
+.icon-dialog__icon-item--selected {
+  border: 2px solid #007aff;
+  border-radius: 8px;
+  background: #e6f0ff;
+}

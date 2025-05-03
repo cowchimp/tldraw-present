@@ -3,6 +3,7 @@ import { TldrawUiButton, TldrawUiButtonLabel, TldrawUiDialogBody, TldrawUiDialog
 import iconsJson from "@icon-park/svg/icons.json";
 import "./IconDialog.css";
 import { IconPreview } from "./IconPreview";
+import { getIcon, setIcon } from "./selectedIcon";
 
 const categories = iconsJson.reduce((acc, icon) => {
   acc.add(icon.category);
@@ -12,6 +13,7 @@ const categories = iconsJson.reduce((acc, icon) => {
 export function IconDialog({ onClose }: { onClose: () => void }) {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
 
   const filteredIcons = iconsJson.filter((icon) => {
     const matchesCategory = selectedCategory ? icon.category === selectedCategory : true;
@@ -47,8 +49,13 @@ export function IconDialog({ onClose }: { onClose: () => void }) {
             {filteredIcons.map((x) => (
               <div
                 key={x.name}
-                className="icon-dialog__icon-item"
-                onClick={() => console.log("Selected icon:", x.name)}
+                className={`icon-dialog__icon-item${
+                  selectedIcon === x.name ? " icon-dialog__icon-item--selected" : ""
+                }`}
+                onClick={() => {
+                  setSelectedIcon(x.name);
+                  setIcon(x.name);
+                }}
                 title={x.name}
               >
                 <IconPreview name={x.name} />

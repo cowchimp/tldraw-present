@@ -1,5 +1,6 @@
 import { AssetRecordType, createShapeId, StateNode, TLImageShape } from "tldraw";
-import { OneKey } from "@icon-park/svg";
+import { getIcon } from "./selectedIcon";
+import { getIconByName } from "./getIconByName";
 
 export class IconTool extends StateNode {
   static override id = "icon" as const;
@@ -12,7 +13,9 @@ export class IconTool extends StateNode {
   override onPointerDown() {
     const { currentPagePoint } = this.editor.inputs;
 
-    const svgString = OneKey({ theme: "outline" });
+    const selectedIconName = getIcon();
+    const icon = getIconByName(selectedIconName);
+    const svgString = icon({ theme: "outline" });
     const size = 48;
 
     const svgDataUrl = svgStringToBase64(svgString);
