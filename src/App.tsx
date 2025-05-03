@@ -7,8 +7,50 @@ import { getUniqueGroupIdsInOrder } from "./getUniqueGroupIdsInOrder";
 import { getNewActions } from "./getNewActions";
 import { assetUrls } from "./assetUrls";
 import { SharePanel } from "./SharePanel";
-import { DialogHandler } from "./WelcomeDialog/DialogHandler";
-import { IconTool } from "./IconTool";
+import { WelcomeDialogHandler } from "./WelcomeDialog/WelcomeDialogHandler";
+import { IconTool } from "./IconTool/IconTool";
+import { IconDialogHandler } from "./IconTool/IconDialogHandler";
+import {
+  DefaultToolbar,
+  DefaultToolbarContent,
+  TldrawUiMenuItem,
+  useIsToolSelected,
+  useTools,
+  TLUiOverrides,
+  TLComponents,
+} from "tldraw";
+
+const uiOverrides: TLUiOverrides = {
+  tools(editor, tools) {
+    tools.icon = {
+      id: "icon",
+      icon: "icon-tool",
+      label: "Icon",
+      kbd: "i",
+      onSelect: () => {
+        editor.setCurrentTool("icon");
+      },
+    };
+    return tools;
+  },
+};
+
+const Toolbar: TLComponents["Toolbar"] = (props) => {
+  const tools = useTools();
+  const isIconSelected = useIsToolSelected(tools["icon"]);
+  return (
+    <DefaultToolbar {...props}>
+      <TldrawUiMenuItem {...tools["icon"]} isSelected={isIconSelected} />
+      <DefaultToolbarContent />
+    </DefaultToolbar>
+  );
+};
+
+const customAssetUrls = {
+  icons: {
+    "icon-tool": "/icon-tool.svg",
+  },
+};
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
@@ -44,8 +86,8 @@ export default function App() {
           }
         }}
         tools={customTools}
-        initialState="icon"
         overrides={{
+          ...uiOverrides,
           actions: (_editor, actions) => {
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(_editor);
             const maxStep = uniqueGroupIdsInOrder.length - 1;
@@ -67,6 +109,7 @@ export default function App() {
         components={{
           ...(isPresentationEditModeActive ? { InFrontOfTheCanvas } : {}),
           ...(isPresentationModeActive ? { StylePanel: null } : {}),
+          Toolbar,
           QuickActions: () => {
             const editor = useEditor();
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(editor);
@@ -80,7 +123,12 @@ export default function App() {
             );
           },
           SharePanel,
-          TopPanel: DialogHandler,
+          TopPanel: () => (
+            <>
+              <WelcomeDialogHandler />
+              <IconDialogHandler />
+            </>
+          ),
         }}
         getShapeVisibility={(shape, editor) => {
           if (!isPresentationModeActive) {
@@ -90,7 +138,7 @@ export default function App() {
           const groupId = uniqueGroupIdsInOrder[currentStep];
           return Number(shape.meta.groupId) > groupId ? "hidden" : "visible";
         }}
-        assetUrls={assetUrls}
+        assetUrls={{ ...assetUrls, ...customAssetUrls }}
         onMount={(editor) => {
           editorRef.current = editor;
           editor.getInitialMetaForShape = () => {

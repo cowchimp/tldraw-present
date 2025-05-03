@@ -3,7 +3,7 @@ import { useWelcomeDialog } from "./useWelcomeDialog";
 
 let hasShownDialogThisSession = false;
 
-export function DialogHandler() {
+export function WelcomeDialogHandler() {
   const { showDialog, getDontShowAgainPreference } = useWelcomeDialog();
 
   useEffect(() => {

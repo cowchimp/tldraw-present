@@ -1,0 +1,14 @@
+.category {
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  pointer-events: all;
+  padding: 4px 12px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 64px;
+}
+
+.category.active {
+  background-color: black;
+  color: white;
+}

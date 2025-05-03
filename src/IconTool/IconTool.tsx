@@ -5,7 +5,8 @@ export class IconTool extends StateNode {
   static override id = "icon" as const;
 
   override onEnter() {
-    this.editor.setCursor({ type: "cross", rotation: 0 });
+    console.log("open-icon-dialog");
+    this.editor.emit("open-icon-dialog" as any, {});
   }
 
   override onPointerDown() {
