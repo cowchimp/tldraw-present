@@ -6,7 +6,7 @@ const iconCache = new Map<string, React.ReactNode>();
 export function IconPreview({ name }: { name: string }) {
   if (!iconCache.has(name)) {
     const icon = getIconByName(name);
-    const svg = icon({});
+    const svg = icon({ size: 24 });
     iconCache.set(name, parse(svg));
   }
   return iconCache.get(name)!;

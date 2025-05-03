@@ -73,7 +73,6 @@ export function IconDialog({
                 title={x.name}
               >
                 <IconPreview name={x.name} />
-                <span className="icon-dialog__icon-label">{x.name}</span>
               </div>
             ))}
           </div>
