@@ -4,8 +4,20 @@ import { pascalCase } from "change-case";
 
 const allIcons = iconPark as unknown as Record<string, (opts: IIconProps) => string>;
 
-export function getIconByName(name: string) {
+export function getSvgIcon(
+  name: string,
+  opts: {
+    size: number;
+    outFillColor: string;
+  },
+) {
   const propKey = pascalCase(name);
   const icon = allIcons[propKey];
-  return icon;
+  const svgString = icon({
+    size: opts.size,
+    theme: "multi-color",
+    fill: ["#000", opts.outFillColor],
+    strokeWidth: 4,
+  });
+  return svgString;
 }

@@ -19,7 +19,7 @@ export function IconDialog({
   onSelectIcon: (iconName: string) => void;
 }) {
   const editor = useEditor();
-  const solid = getFillColor(editor);
+  const fillColor = getFillColor(editor);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
@@ -75,7 +75,7 @@ export function IconDialog({
                 }}
                 title={x.name}
               >
-                <IconPreview name={x.name} fillColor={solid} />
+                <IconPreview name={x.name} fillColor={fillColor} />
               </div>
             ))}
           </div>

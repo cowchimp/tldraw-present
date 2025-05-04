@@ -8,7 +8,7 @@ import { EXIT_EVENT_NAME, ENTER_EVENT_NAME } from "./constants";
 
 export function IconDialogHandler() {
   const editor = useEditor();
-  const solid = getFillColor(editor);
+  const fillColor = getFillColor(editor);
   const dialogs = useDialogs();
   const [isIconToolActive, setIsIconToolActive] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
@@ -49,7 +49,7 @@ export function IconDialogHandler() {
           })
         }
       >
-        <IconPreview name={selectedIcon} fillColor={solid} />
+        <IconPreview name={selectedIcon} fillColor={fillColor} />
       </TldrawUiButton>
     )
   );

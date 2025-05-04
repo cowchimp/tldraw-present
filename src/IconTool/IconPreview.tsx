@@ -1,8 +1,10 @@
 import parse from "html-react-parser";
-import { getIconByName } from "./getIconByName";
+import { getSvgIcon } from "./getSvgIcon";
 
 export function IconPreview({ name, fillColor }: { name: string; fillColor: string }) {
-  const icon = getIconByName(name);
-  const svg = icon({ size: 24, theme: "filled", fill: fillColor });
-  return parse(svg);
+  const svgString = getSvgIcon(name, {
+    size: 24,
+    outFillColor: fillColor,
+  });
+  return parse(svgString);
 }
