@@ -6,7 +6,7 @@ export const assetUrls = {
     "chevron-left": "/MdiChevronLeft.svg",
     "chevron-right": "/MdiChevronRight.svg",
     "chevron-last": "/MdiPageLast.svg",
-    "icon-icon": "/icon-park.svg",
+    "icon-icon": "/audit.svg",
     help: "/MdiHelpBox.svg",
     blog: "/MdiWebBox.svg",
     twitter: "/MdiTwitterBox.svg",
