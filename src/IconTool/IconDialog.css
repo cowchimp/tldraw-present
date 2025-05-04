@@ -34,8 +34,9 @@
 .icon-dialog__icon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  grid-auto-rows: max-content;
   gap: 12px;
-  max-height: 400px;
+  height: 400px;
   overflow-y: auto;
   background: #fafbfc;
   padding: 8px;
