@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { TldrawUiButton, TldrawUiButtonLabel, TldrawUiDialogBody, TldrawUiDialogFooter } from "tldraw";
+import { TldrawUiButton, TldrawUiButtonLabel, TldrawUiDialogBody, TldrawUiDialogFooter, useEditor } from "tldraw";
 import iconsJson from "@icon-park/svg/icons.json";
 import "./IconDialog.css";
 import { IconPreview } from "./IconPreview";
 import { getIcon } from "./selectedIcon";
+import { getFillColor } from "./getFillColor";
 
 const categories = iconsJson.reduce((acc, icon) => {
   acc.add(icon.category);
@@ -17,6 +18,8 @@ export function IconDialog({
   onClose: () => void;
   onSelectIcon: (iconName: string) => void;
 }) {
+  const editor = useEditor();
+  const solid = getFillColor(editor);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
@@ -72,7 +75,7 @@ export function IconDialog({
                 }}
                 title={x.name}
               >
-                <IconPreview name={x.name} />
+                <IconPreview name={x.name} fillColor={solid} />
               </div>
             ))}
           </div>

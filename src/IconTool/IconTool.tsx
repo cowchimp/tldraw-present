@@ -1,7 +1,7 @@
 import { AssetRecordType, createShapeId, StateNode, TLImageShape } from "tldraw";
 import { getIcon } from "./selectedIcon";
 import { getIconByName } from "./getIconByName";
-import { DEFAULT_ICON_FILL_COLOR } from "./constants";
+import { getFillColor } from "./getFillColor";
 
 export class IconTool extends StateNode {
   static override id = "icon" as const;
@@ -16,10 +16,11 @@ export class IconTool extends StateNode {
 
   override onPointerDown() {
     const { currentPagePoint } = this.editor.inputs;
+    const solid = getFillColor(this.editor);
 
     const selectedIconName = getIcon();
     const icon = getIconByName(selectedIconName);
-    const svgString = icon({ theme: "filled", fill: DEFAULT_ICON_FILL_COLOR });
+    const svgString = icon({ theme: "filled", fill: solid });
     console.log(svgString);
     const size = 48;
 

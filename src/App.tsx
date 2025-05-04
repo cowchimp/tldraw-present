@@ -46,7 +46,7 @@ export default function App() {
   return (
     <div style={{ position: "fixed", inset: 0 }}>
       <Tldraw
-        persistenceKey="icon"
+        persistenceKey="icon2"
         onUiEvent={(event) => {
           if (event === "change-page") {
             setCurrentStep(0);

@@ -3,9 +3,11 @@ import { IconDialog } from "./IconDialog";
 import { IconPreview } from "./IconPreview";
 import { getIcon, setIcon } from "./selectedIcon";
 import { useEffect, useState } from "react";
+import { getFillColor } from "./getFillColor";
 
 export function IconDialogHandler() {
   const editor = useEditor();
+  const solid = getFillColor(editor);
   const dialogs = useDialogs();
   const [isIconToolActive, setIsIconToolActive] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(() => getIcon());
@@ -46,7 +48,7 @@ export function IconDialogHandler() {
           })
         }
       >
-        <IconPreview name={selectedIcon} />
+        <IconPreview name={selectedIcon} fillColor={solid} />
       </TldrawUiButton>
     )
   );
