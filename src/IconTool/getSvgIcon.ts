@@ -16,7 +16,7 @@ export function getSvgIcon(
   const svgString = icon({
     size: opts.size,
     theme: "multi-color",
-    fill: ["#000", opts.outFillColor],
+    fill: ["#000", opts.outFillColor, "#FFF", "#000"],
     strokeWidth: 4,
   });
   return svgString;
