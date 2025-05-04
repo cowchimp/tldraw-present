@@ -2,16 +2,17 @@ import { AssetRecordType, createShapeId, StateNode, TLImageShape } from "tldraw"
 import { getIcon } from "./selectedIcon";
 import { getSvgIcon } from "./getSvgIcon";
 import { getFillColor } from "./getFillColor";
+import { ENTER_EVENT_NAME, EXIT_EVENT_NAME } from "./constants";
 
 export class IconTool extends StateNode {
   static override id = "icon" as const;
 
   override onEnter(): void {
-    this.editor.emit("icon-tool-enter" as any, {});
+    this.editor.emit(ENTER_EVENT_NAME, {});
   }
 
   override onExit(): void {
-    this.editor.emit("icon-tool-exit" as any, {});
+    this.editor.emit(EXIT_EVENT_NAME, {});
   }
 
   override onPointerDown() {
