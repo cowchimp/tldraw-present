@@ -2,9 +2,9 @@ import { useState } from "react";
 import { TldrawUiButton, TldrawUiButtonLabel, TldrawUiDialogBody, TldrawUiDialogFooter, useEditor } from "tldraw";
 import iconsJson from "@icon-park/svg/icons.json";
 import "./IconDialog.css";
-import { IconPreview } from "./IconPreview";
 import { getIcon } from "./selectedIcon";
 import { getFillColor } from "./getFillColor";
+import { IconGrid } from "./IconGrid";
 
 const categories = iconsJson.reduce((acc, icon) => {
   acc.add(icon.category);
@@ -59,26 +59,13 @@ export function IconDialog({
         {filteredIcons.length === 0 ? (
           <div className="icon-dialog__no-matches">No matches</div>
         ) : (
-          <div className="icon-dialog__icon-grid">
-            {filteredIcons.map((x) => (
-              <div
-                key={x.name}
-                className={`icon-dialog__icon-item${
-                  selectedIcon === x.name ? " icon-dialog__icon-item--selected" : ""
-                }`}
-                onClick={() => {
-                  onSetIcon(x.name);
-                }}
-                onDoubleClick={() => {
-                  onSetIcon(x.name);
-                  onClose();
-                }}
-                title={x.name}
-              >
-                <IconPreview name={x.name} fillColor={fillColor} />
-              </div>
-            ))}
-          </div>
+          <IconGrid
+            iconNames={filteredIcons.map((x) => x.name)}
+            selectedIcon={selectedIcon}
+            onSetIcon={onSetIcon}
+            onClose={onClose}
+            fillColor={fillColor}
+          />
         )}
       </TldrawUiDialogBody>
       <TldrawUiDialogFooter className="tlui-dialog__footer__actions">
