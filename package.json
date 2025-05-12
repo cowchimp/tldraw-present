@@ -17,13 +17,13 @@
     "embla-carousel-react": "^8.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tldraw": "^3.12.1"
+    "tldraw": "^3.12.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
-    "@tldraw/tldraw": "^3.12.1",
+    "@tldraw/tldraw": "^3.12.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
