@@ -7,7 +7,7 @@ export function SharePanel() {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <TldrawUiButton type="icon" onClick={showDialog}>
-        <TldrawUiIcon icon="help" />
+        <TldrawUiIcon icon="help" label="Help" />
       </TldrawUiButton>
       <Link href="https://yonatan.dev" icon="blog" label="Visit my blog" />
       <Link href="https://twitter.com/cowchimp" icon="twitter" label="Reach out on Twitter" />
@@ -19,7 +19,7 @@ export function SharePanel() {
 function Link({ href, icon, label }: { href: string; icon: string; label: string }) {
   return (
     <a href={href} title={label} className="tlui-button" target="_blank" rel="noopener noreferrer">
-      <TldrawUiIcon icon={icon} />
+      <TldrawUiIcon icon={icon} label={label} />
     </a>
   );
 }
