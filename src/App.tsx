@@ -19,7 +19,7 @@ import { SharePanel } from "./SharePanel";
 import { WelcomeDialogHandler } from "./WelcomeDialog/WelcomeDialogHandler";
 import { IconTool } from "./IconTool/IconTool";
 import { IconDialogHandler } from "./IconTool/IconDialogHandler";
-import { extendWithIconTool } from "./IconTool/ui-overrides.tsx";
+import { extendWithIconTool } from "./IconTool/extendWithIconTool.tsx";
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
