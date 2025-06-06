@@ -1,0 +1,59 @@
+.icon-dialog__category {
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid black;
+  border-radius: 64px;
+}
+
+.icon-dialog__category--active {
+  background-color: black;
+  color: white;
+}
+
+.icon-dialog__search-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.icon-dialog__categories {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.icon-dialog__no-matches {
+  text-align: center;
+  color: #888;
+  margin: 32px 0;
+}
+
+.icon-dialog__icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  grid-auto-rows: max-content;
+  gap: 12px;
+  height: 400px;
+  overflow-y: auto;
+  background: #fafbfc;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.icon-dialog__icon-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+}
+
+.icon-dialog__icon-item--selected {
+  border: 2px solid #007aff;
+  border-radius: 8px;
+  background: #e6f0ff;
+}

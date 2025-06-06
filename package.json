@@ -12,9 +12,12 @@
     "deploy": "npm run build && netlify deploy --prod"
   },
   "dependencies": {
+    "@icon-park/svg": "^1.4.2",
+    "change-case": "^5.4.4",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "html-react-parser": "^5.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tldraw": "^3.13.1"
@@ -31,7 +34,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "netlify-cli": "^20.0.0",
+    "netlify-cli": "^20.1.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",

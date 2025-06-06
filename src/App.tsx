@@ -1,4 +1,13 @@
-import { Editor, Tldraw, useEditor } from "tldraw";
+import {
+  DefaultToolbar,
+  DefaultToolbarContent,
+  Editor,
+  Tldraw,
+  TldrawUiMenuItem,
+  useEditor,
+  useIsToolSelected,
+  useTools,
+} from "tldraw";
 import { useRef, useState } from "react";
 import "tldraw/tldraw.css";
 import { InFrontOfTheCanvas } from "./InFrontOfTheCanvas";
@@ -7,7 +16,10 @@ import { getUniqueGroupIdsInOrder } from "./getUniqueGroupIdsInOrder";
 import { getNewActions } from "./getNewActions";
 import { assetUrls } from "./assetUrls";
 import { SharePanel } from "./SharePanel";
-import { DialogHandler } from "./WelcomeDialog/DialogHandler";
+import { WelcomeDialogHandler } from "./WelcomeDialog/WelcomeDialogHandler";
+import { IconTool } from "./IconTool/IconTool";
+import { IconDialogHandler } from "./IconTool/IconDialogHandler";
+import { extendWithIconTool } from "./IconTool/extendWithIconTool.tsx";
 
 export default function App() {
   const [isPresentationModeActive, setIsPresentationModeActive] = useState(false);
@@ -40,7 +52,11 @@ export default function App() {
             setCurrentStep(0);
           }
         }}
+        tools={[IconTool]}
         overrides={{
+          tools(editor, tools) {
+            return extendWithIconTool(editor, tools);
+          },
           actions: (_editor, actions) => {
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(_editor);
             const maxStep = uniqueGroupIdsInOrder.length - 1;
@@ -62,6 +78,16 @@ export default function App() {
         components={{
           ...(isPresentationEditModeActive ? { InFrontOfTheCanvas } : {}),
           ...(isPresentationModeActive ? { StylePanel: null } : {}),
+          Toolbar: (props) => {
+            const tools = useTools();
+            const isIconSelected = useIsToolSelected(tools["icon"]);
+            return (
+              <DefaultToolbar {...props}>
+                <TldrawUiMenuItem {...tools["icon"]} isSelected={isIconSelected} />
+                <DefaultToolbarContent />
+              </DefaultToolbar>
+            );
+          },
           QuickActions: () => {
             const editor = useEditor();
             const uniqueGroupIdsInOrder = getUniqueGroupIdsInOrder(editor);
@@ -75,7 +101,12 @@ export default function App() {
             );
           },
           SharePanel,
-          TopPanel: DialogHandler,
+          TopPanel: () => (
+            <>
+              <WelcomeDialogHandler />
+              <IconDialogHandler />
+            </>
+          ),
         }}
         getShapeVisibility={(shape, editor) => {
           if (!isPresentationModeActive) {
