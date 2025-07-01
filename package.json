@@ -20,13 +20,13 @@
     "html-react-parser": "^5.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tldraw": "^3.13.3"
+    "tldraw": "^3.13.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
-    "@tldraw/tldraw": "^3.13.3",
+    "@tldraw/tldraw": "^3.13.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
