@@ -1,4 +1,10 @@
-import { DefaultQuickActions, DefaultQuickActionsContent, TldrawUiMenuItem, useActions } from "tldraw";
+import {
+  DefaultQuickActions,
+  DefaultQuickActionsContent,
+  TldrawUiMenuItem,
+  useActions,
+  TLUiActionsContextType,
+} from "tldraw";
 
 export function CustomQuickActions({
   currentStep,
@@ -10,10 +16,12 @@ export function CustomQuickActions({
   isPresentationEditModeActive: boolean;
 }) {
   const actions = useActions();
+  const transformedActions = transformActionForMenuItem(actions);
+
   return (
     <DefaultQuickActions>
       <DefaultQuickActionsContent />
-      {actions["presentation-edit"] && (
+      {transformedActions["presentation-edit"] && (
         <>
           {isPresentationEditModeActive ? (
             <div
@@ -22,26 +30,38 @@ export function CustomQuickActions({
                 borderRadius: "4px",
               }}
             >
-              <TldrawUiMenuItem {...actions["presentation-edit"]} />
+              <TldrawUiMenuItem {...transformedActions["presentation-edit"]} />
             </div>
           ) : (
-            <TldrawUiMenuItem {...actions["presentation-edit"]} />
+            <TldrawUiMenuItem {...transformedActions["presentation-edit"]} />
           )}
         </>
       )}
-      {actions["presentation"] && <TldrawUiMenuItem {...actions["presentation"]} />}
-      {actions["presentation-first"] && (
-        <TldrawUiMenuItem {...actions["presentation-first"]} disabled={currentStep === 0} />
+      {transformedActions["presentation"] && <TldrawUiMenuItem {...transformedActions["presentation"]} />}
+      {transformedActions["presentation-first"] && (
+        <TldrawUiMenuItem {...transformedActions["presentation-first"]} disabled={currentStep === 0} />
       )}
-      {actions["presentation-left"] && (
-        <TldrawUiMenuItem {...actions["presentation-left"]} disabled={currentStep === 0} />
+      {transformedActions["presentation-left"] && (
+        <TldrawUiMenuItem {...transformedActions["presentation-left"]} disabled={currentStep === 0} />
       )}
-      {actions["presentation-right"] && (
-        <TldrawUiMenuItem {...actions["presentation-right"]} disabled={currentStep === maxStep} />
+      {transformedActions["presentation-right"] && (
+        <TldrawUiMenuItem {...transformedActions["presentation-right"]} disabled={currentStep === maxStep} />
       )}
-      {actions["presentation-last"] && (
-        <TldrawUiMenuItem {...actions["presentation-last"]} disabled={currentStep === maxStep} />
+      {transformedActions["presentation-last"] && (
+        <TldrawUiMenuItem {...transformedActions["presentation-last"]} disabled={currentStep === maxStep} />
       )}
     </DefaultQuickActions>
+  );
+}
+
+function transformActionForMenuItem(actions: TLUiActionsContextType) {
+  return Object.fromEntries(
+    Object.entries(actions).map(([key, action]) => [
+      key,
+      {
+        ...action,
+        icon: action.icon as string,
+      },
+    ]),
   );
 }
